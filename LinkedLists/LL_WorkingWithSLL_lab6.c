@@ -32,49 +32,6 @@ void displayLL()
     getch();
 }
 
-void deleteNodeMenu()
-{
-    do
-    {
-        system("cls");
-        printf("1.\tDelete from beginning\n2.\tDelete from end\n3.\tReturn to main menu\n");
-        printf("Choice: ");
-        scanf("%d",&choice);
-        switch (choice)
-        {
-            case 1: {
-            }
-            case 2: {
-            }
-            case 3: {
-            }
-            default: printf("WrongInput!");break;
-        }
-    }while(choice != 3);
-}
-
-void insertNodeMenu()
-{
-    do
-    {
-        printf("\n\n1.\tInsert at beginning\n2.\tInsert at end\n3.\tReturn to main menu\n");
-        printf("Choice: ");
-        scanf("%d",&choice);
-        switch (choice)
-        {
-            case 1: {
-                insertNodeInBegin();break;
-            }
-            case 2: {
-                insertNodeAtEnd();break;
-            }
-            case 3: {
-            }
-            default: printf("WrongInput!");break;
-        }
-    }while(choice != 3);
-}
-
 void insertNodeAtEnd()
 {
     ptr = head;
@@ -97,6 +54,136 @@ void insertNodeInBegin()
     scanf("%d",&ptr->data);
     ptr->next = head;
     head = new1;
+}
+
+void insertNodeMenu()
+{
+    do
+    {
+        printf("\n\n1.\tInsert at beginning\n2.\tInsert at end\n3.\tReturn to main menu\n");
+        printf("Choice: ");
+        scanf("%d",&choice);
+        switch (choice)
+        {
+            case 1: {
+                insertNodeInBegin();break;
+            }
+            case 2: {
+                insertNodeAtEnd();break;
+            }
+            case 3: {
+                break;
+            }
+            default: printf("WrongInput!");break;
+        }
+    }while(choice != 3);
+}
+
+void deleteNodeBegin()
+{
+    ptr = head;
+    if (ptr!= NULL)
+    {
+        new1 = head;
+        head = head->next;
+        printf("\nDeleted element: %d", ptr->data);
+        getch();
+        free(ptr);
+    }
+    else
+    {
+        printf("\nLinked List is empty\n");
+        getch();
+    }
+}
+
+void deleteNodeEnd()
+{
+    ptr = head;
+    if(ptr!= NULL)
+    {
+        while(ptr->next!=NULL)
+        {
+            new1=ptr;
+            ptr = ptr->next;
+        }
+        printf("\nDeleted element: %d", ptr->data);
+        new1->next=NULL;
+        getch();
+        free(ptr);
+    }
+    else
+    {
+        printf("Linked List is empty!\n");
+        getch();
+    }
+}
+void deleteNodeMenu()
+{
+    do
+    {
+        system("cls");
+        printf("1.\tDelete from beginning\n2.\tDelete from end\n3.\tReturn to main menu\n");
+        printf("Choice: ");
+        scanf("%d",&choice);
+        switch (choice)
+        {
+            case 1: {
+                deleteNodeBegin();break;
+            }
+            case 2: {
+                deleteNodeEnd();break;
+            }
+            case 3: {
+                break;
+            }
+            default: printf("WrongInput!");break;
+        }
+    }while(choice != 3);
+}
+
+void deleteElement()
+{
+    ptr = head;
+    if(ptr == NULL)
+    {
+        printf("\nLinked List is empty\n");
+    }
+    else
+    {
+        int temp;
+        printf("\nEnter the element to delete: ");
+        scanf("%d", &temp);
+        //ptr = head;
+        while (ptr->next != NULL)
+        {
+            ptr = head;
+            new1 = ptr->next;
+            if(ptr->data == temp)
+            {
+               printf("\nDeleting element: %d\n", ptr->data);
+               getch();
+               new1 = ptr;
+               head = ptr->next;
+               free(new1);
+               break;
+            }
+            if (ptr->next->data == temp)
+            {
+                printf("\nDeleting element: %d\n", new1->data);
+                getch();
+                ptr->next = new1->next;
+                free(new1);
+                break;
+            }
+            ptr = ptr->next;
+        }
+        if(ptr->next == NULL)
+        {
+            printf("\nElement not found in the linked List!\n");
+            getch();
+        }
+    }
 }
 
 void main()
@@ -136,8 +223,8 @@ void main()
         switch(op)
         {
             case 1 : displayLL();insertNodeMenu();break;
-            case 2 : printf("");
-            case 3 : printf("");
+            case 2 : deleteNodeMenu();break;
+            case 3 : deleteElement();break;
             case 4 : exit(1);
             default : system("cls");printf("Wrong Input!");
         }
