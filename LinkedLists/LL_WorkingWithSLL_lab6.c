@@ -10,6 +10,7 @@ struct llist
 
 typedef struct llist node;
 node *head, *ptr, *new1;
+int choice;
 
 void displayMenu()
 {
@@ -31,10 +32,71 @@ void displayLL()
     getch();
 }
 
-void deleteNode()
+void deleteNodeMenu()
 {
-    printf("1.\tDelete from beginning\n2.\tDelete from end\n");
-    choice()
+    do
+    {
+        system("cls");
+        printf("1.\tDelete from beginning\n2.\tDelete from end\n3.\tReturn to main menu\n");
+        printf("Choice: ");
+        scanf("%d",&choice);
+        switch (choice)
+        {
+            case 1: {
+            }
+            case 2: {
+            }
+            case 3: {
+            }
+            default: printf("WrongInput!");break;
+        }
+    }while(choice != 3);
+}
+
+void insertNodeMenu()
+{
+    do
+    {
+        printf("\n\n1.\tInsert at beginning\n2.\tInsert at end\n3.\tReturn to main menu\n");
+        printf("Choice: ");
+        scanf("%d",&choice);
+        switch (choice)
+        {
+            case 1: {
+                insertNodeInBegin();break;
+            }
+            case 2: {
+                insertNodeAtEnd();break;
+            }
+            case 3: {
+            }
+            default: printf("WrongInput!");break;
+        }
+    }while(choice != 3);
+}
+
+void insertNodeAtEnd()
+{
+    ptr = head;
+    while(ptr != NULL)
+    {
+        ptr = ptr->next;
+    }
+    new1 = (node*)malloc(sizeof(node));
+    ptr->next = new1;
+    ptr = new1;
+    printf("\nEnter data: ");
+    scanf("%d",&ptr->data);
+}
+
+void insertNodeInBegin()
+{
+    new1 = (node*)malloc(sizeof(node));
+    ptr = new1;
+    printf("\nEnter data: ");
+    scanf("%d",&ptr->data);
+    ptr->next = head;
+    head = new1;
 }
 
 void main()
@@ -73,7 +135,7 @@ void main()
         scanf("%d",&op);
         switch(op)
         {
-            case 1 : displayLL();break;
+            case 1 : displayLL();insertNodeMenu();break;
             case 2 : printf("");
             case 3 : printf("");
             case 4 : exit(1);
