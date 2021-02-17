@@ -144,46 +144,39 @@ void deleteNodeMenu()
 
 void deleteElement()
 {
+    int temp;
+    printf("\nEnter the element to delete: ");
+    scanf("%d", &temp);
     ptr = head;
-    if(ptr == NULL)
+    new1 = NULL;
+    while (ptr!= NULL)
     {
-        printf("\nLinked List is empty\n");
-    }
-    else
-    {
-        int temp;
-        printf("\nEnter the element to delete: ");
-        scanf("%d", &temp);
-        //ptr = head;
-        while (ptr->next != NULL)
+        if(ptr->data == temp)
         {
-            ptr = head;
-            new1 = ptr->next;
-            if(ptr->data == temp)
-            {
-               printf("\nDeleting element: %d\n", ptr->data);
-               getch();
-               new1 = ptr;
-               head = ptr->next;
-               free(new1);
-               break;
-            }
-            if (ptr->next->data == temp)
-            {
-                printf("\nDeleting element: %d\n", new1->data);
-                getch();
-                ptr->next = new1->next;
-                free(new1);
-                break;
-            }
-            ptr = ptr->next;
+            break;
         }
-        if(ptr->next == NULL)
+        new1 = ptr;
+        ptr = ptr->next;
+    }
+
+        if(ptr == NULL)
         {
-            printf("\nElement not found in the linked List!\n");
+            printf("\nElement not found !\n");
             getch();
         }
-    }
+        else if (new1 == NULL)
+        {
+            printf("\nDeleting element from firstNode: %d\n", ptr->data);
+            head = ptr->next;
+            getch();
+        }
+        else
+        {
+            printf("\nDeleting element: %d\n", ptr->data);
+            getch();
+            new1->next = ptr->next;
+        }
+        free(ptr);
 }
 
 void main()
