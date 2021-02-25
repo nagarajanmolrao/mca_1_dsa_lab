@@ -56,11 +56,51 @@ void insertNodeInBegin()
     head = new1;
 }
 
+void insertNodeAtN()
+{
+    ptr = head;
+    new1 = (node *)malloc(sizeof(node));
+    int pos,i,count=0;
+    printf("Enter the position: ");
+    scanf("%d", &pos);
+    printf("\nEnter data: ");
+    scanf("%d", &new1->data);
+    new1->next = NULL;
+    while(ptr!=NULL)
+    {
+        ptr = ptr->next;
+        count ++;
+    }
+    ptr = head;
+    if(pos<count+1)
+    {
+        if ( pos == 1 )
+        {
+            new1->next = head;
+            head = new1;
+            displayLL();
+            return;
+        }
+        for (i=0;i<pos-2;i++)
+        {
+                ptr = ptr->next;
+        }
+        new1->next = ptr->next;
+        ptr->next = new1;
+        displayLL();
+    }
+    else
+    {
+        printf("Position not found!\n");
+        getch();
+    }
+}
+
 void insertNodeMenu()
 {
     do
     {
-        printf("\n\n1.\tInsert at beginning\n2.\tInsert at end\n3.\tReturn to main menu\n");
+        printf("\n\n1.\tInsert at beginning\n2.\tInsert at end\n3.\tInsert at Nth Position\n4.\tReturn to main menu\n");
         printf("Choice: ");
         scanf("%d",&choice);
         switch (choice)
@@ -72,11 +112,14 @@ void insertNodeMenu()
                 insertNodeAtEnd();break;
             }
             case 3: {
+                insertNodeAtN();break;
+            }
+            case 4 : {
                 break;
             }
             default: printf("WrongInput!");break;
         }
-    }while(choice != 3);
+    }while(choice != 4);
 }
 
 void deleteNodeBegin()
