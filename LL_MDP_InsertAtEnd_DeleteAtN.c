@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<conio.h>
-#include<stdlib.>
+#include<stdlib.h>
 
 struct llist
 {
@@ -24,9 +24,10 @@ void countNodes()
 void display_LL()
 {
     head = ptr;
+    printf("\n");
     while(ptr!=NULL)
     {
-        printf("%d\t",&ptr_data);
+        printf("%d\t",&ptr->data);
         ptr = ptr->next;
     }
 }
@@ -35,11 +36,14 @@ void insert_at_end()
 {
     new1 = (node*)malloc(sizeof(node));
     ptr = head;
-    countNodes();
-    printf("Enter data: ");
+    printf("\nEnter data: ");
     scanf("%d",&new1->data);
     new1->next = NULL;
     ptr = head;
+    if(ptr == NULL)
+    {
+        head = new1;
+    }
     while(ptr!=NULL)
     {
         ptr = ptr->next;
@@ -52,29 +56,32 @@ void delete_N_node()
 {
     int n,i;
     node *loc,*locp;
-    printf("Enter position: ");
+    printf("\nEnter position: ");
     scanf("%d",&n);
     if(n>count)
-        print("Invalid Position\n");
+    {
+        printf("Invalid Position\n");
+        return;
+    }
     else
     {
         loc = head;
         for (i=2;i<n;i++)
         {
-            loop = loc;
+            locp = loc;
             loc = loc->next;
         }
-        if(head == loc)&&(loc->next==NULL)
+        if ((head == loc)&&(loc->next==NULL))
         {
             head = NULL;
             free(loc);
         }
-        else if(head == loc) && (loc->next != NULL)
+        else if((head == loc) && (loc->next != NULL))
         {
             head = head->next;
             free(loc);
         }
-        else if(head!=loc) && (loc->next == NULL)
+        else if((head!=loc) && (loc->next == NULL))
         {
             locp->next =NULL;
             free(loc);
@@ -93,6 +100,7 @@ void main()
     int choice;
     do
     {
+        system("cls");
         printf("\nLINKED LIST OPERATIONS\n1.\tInsert at End\n2.\tDelete Nth Node\n3.\tDisplay\n4.\tExit\n\nChoice : ");
         scanf("%d",&choice);
         switch(choice)
