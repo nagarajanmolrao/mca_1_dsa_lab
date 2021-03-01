@@ -51,10 +51,10 @@ void insertNodeAtEnd()
         ptr = ptr->next;
     }
     new1 = (node*)malloc(sizeof(node));
-    ptr->next = new1;
-    ptr = new1;
     printf("\nEnter data: ");
     scanf("%d",&ptr->data);
+    ptr->next = new1;
+    ptr = new1;
 }
 
 void insertNodeInBegin()
