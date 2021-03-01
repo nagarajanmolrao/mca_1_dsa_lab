@@ -50,7 +50,42 @@ void insert_at_end()
 
 void delete_N_node()
 {
-
+    int n,i;
+    node *loc,*locp;
+    printf("Enter position: ");
+    scanf("%d",&n);
+    if(n>count)
+        print("Invalid Position\n");
+    else
+    {
+        loc = head;
+        for (i=2;i<n;i++)
+        {
+            loop = loc;
+            loc = loc->next;
+        }
+        if(head == loc)&&(loc->next==NULL)
+        {
+            head = NULL;
+            free(loc);
+        }
+        else if(head == loc) && (loc->next != NULL)
+        {
+            head = head->next;
+            free(loc);
+        }
+        else if(head!=loc) && (loc->next == NULL)
+        {
+            locp->next =NULL;
+            free(loc);
+        }
+        else
+        {
+            locp->next = loc->next;
+            free(loc);
+        }
+    }
+    count--;
 }
 
 void main()
