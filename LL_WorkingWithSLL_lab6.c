@@ -10,7 +10,18 @@ struct llist
 
 typedef struct llist node;
 node *head, *ptr, *new1;
-int choice;
+int choice, count=0;
+
+void countNodes()
+{
+    count = 0;
+    ptr = head;
+    while (ptr!=NULL)
+    {
+        ptr = ptr->next;
+        count++;
+    }
+}
 
 void displayMenu()
 {
@@ -59,40 +70,43 @@ void insertNodeInBegin()
 void insertNodeAtN()
 {
     ptr = head;
+    node *loc;
     new1 = (node *)malloc(sizeof(node));
-    int pos,i,count=0;
+    int pos,i;
+    countNodes();
     printf("Enter the position: ");
     scanf("%d", &pos);
-    printf("\nEnter data: ");
-    scanf("%d", &new1->data);
-    new1->next = NULL;
-    while(ptr!=NULL)
-    {
-        ptr = ptr->next;
-        count ++;
-    }
-    ptr = head;
-    if(pos<count+1)
-    {
-        if ( pos == 1 )
-        {
-            new1->next = head;
-            head = new1;
-            displayLL();
-            return;
-        }
-        for (i=0;i<pos-2;i++)
-        {
-                ptr = ptr->next;
-        }
-        new1->next = ptr->next;
-        ptr->next = new1;
-        displayLL();
-    }
+    if(pos > count)
+        printf("Invalid Position");
     else
     {
-        printf("Position not found!\n");
-        getch();
+        new1 = (node *) malloc(sizeof(node));
+        printf("Enter data:");
+        scanf("%d",&new1->data);
+        loc = head;
+        for(i=2;i<pos;i++)
+        {
+            loc = loc->next;
+        }
+        if(loc == NULL)
+        {
+            loc = new1;
+        }
+        else if(loc ==head)
+        {
+            new1->next=head;
+            head = new1;
+        }
+        else
+        {
+            if((head !=loc)&&(loc->next == NULL))
+                loc->next = new1;
+            else
+            {
+                new1->next = loc->next;
+                loc->next = new1;
+            }
+        }
     }
 }
 
