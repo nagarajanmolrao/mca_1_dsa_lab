@@ -23,33 +23,38 @@ void countNodes()
 
 void display_LL()
 {
-    head = ptr;
+    ptr=head;
     printf("\n");
     while(ptr!=NULL)
     {
-        printf("%d\t",&ptr->data);
+        printf("%d\t",ptr->data);
         ptr = ptr->next;
     }
+    getch();
 }
 
 void insert_at_end()
 {
-    new1 = (node*)malloc(sizeof(node));
+    new1=(node*)malloc(sizeof(node));
+    ptr=(node*)malloc(sizeof(node));
     ptr = head;
     printf("\nEnter data: ");
     scanf("%d",&new1->data);
     new1->next = NULL;
-    ptr = head;
-    if(ptr == NULL)
+    if(head == NULL)
     {
         head = new1;
+        count++;
     }
-    while(ptr!=NULL)
+    else
     {
-        ptr = ptr->next;
+        while(ptr->next!=NULL)
+        {
+            ptr = ptr->next;
+        }
+        ptr->next = new1;
+        count++;
     }
-    ptr->next = new1;
-    count++;
 }
 
 void delete_N_node()
@@ -61,12 +66,13 @@ void delete_N_node()
     if(n>count)
     {
         printf("Invalid Position\n");
+        getch();
         return;
     }
     else
     {
         loc = head;
-        for (i=2;i<n;i++)
+        for (i=2;i<=n;i++)
         {
             locp = loc;
             loc = loc->next;
