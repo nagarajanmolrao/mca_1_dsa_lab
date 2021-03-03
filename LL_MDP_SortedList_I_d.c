@@ -25,40 +25,39 @@ void display_LL()
     getch();
 }
 
-void LL_ian()
+void LL_in()
 {
-    int pos,i;
-    node *new2,*loc;
-    printf("Enter position: ");
-    scanf("%d",&pos);
-    if(pos>count)
+    int pos,i,temp;
+    node *new2,*loc,*locp;
+    printf("Enter element: ");
+    scanf("%d",&temp);
+    loc=head;
+    while(temp>=loc->data)
     {
-        printf("\nInvalid position!");
-        return;
+        locp=loc;
+        loc=loc->next;
+    }
+    new2=(node*)malloc(sizeof(node));
+    new2->data=temp;
+    new2->next=NULL;
+    if(locp==head)
+    {
+        new2->next=head;
+        head=new2;
     }
     else
     {
-        new2=(node*)malloc(sizeof(node));
-        printf("\nEnter data: ");
-        scanf("%d",&new2->data);
-        new2->next=NULL;
-        if(pos==1)
+        /*loc=head;
+        for(i=2;i<pos;i++)
         {
-            new2->next=head;
-            head=new2;
+            loc=loc->next;
         }
-        else
-        {
-            loc=head;
-            for(i=2;i<pos;i++)
-            {
-                loc=loc->next;
-            }
-            new2->next=loc->next;
-            loc->next=new2;
-        }
-        count++;
+        new2->next=loc->next;
+        loc->next=new2;*/
+        new2->next=locp->next;
+        locp->next=new2;
     }
+    count++;
 }
 
 void main()
@@ -67,7 +66,7 @@ void main()
     char op;
     head = (node*)malloc(sizeof(node));
     node *ptr=head;
-    printf("Please input data only in ASCENDING ORDER!")
+    printf("Please input data only in ASCENDING ORDER!");
     printf("Enter initial Linked List:\n");
     printf("Enter data: ");
     scanf("%d",&ptr->data);
