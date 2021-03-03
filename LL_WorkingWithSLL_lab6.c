@@ -69,43 +69,36 @@ void insertNodeInBegin()
 
 void insertNodeAtN()
 {
-    ptr = head;
-    node *loc;
-    new1 = (node *)malloc(sizeof(node));
     int pos,i;
+    node *new2,*loc;
+    printf("Enter position: ");
+    scanf("%d",&pos);
     countNodes();
-    printf("Enter the position: ");
-    scanf("%d", &pos);
-    if(pos > count)
-        printf("Invalid Position");
+    if(pos>count)
+    {
+        printf("\nInvalid position!");
+        return;
+    }
     else
     {
-        new1 = (node *) malloc(sizeof(node));
-        printf("Enter data:");
-        scanf("%d",&new1->data);
-        loc = head;
-        for(i=2;i<pos;i++)
+        new2=(node*)malloc(sizeof(node));
+        printf("\nEnter data: ");
+        scanf("%d",&new2->data);
+        new2->next=NULL;
+        if(pos==1)
         {
-            loc = loc->next;
-        }
-        if(loc == NULL)
-        {
-            loc = new1;
-        }
-        else if(loc ==head)
-        {
-            new1->next=head;
-            head = new1;
+            new2->next=head;
+            head=new2;
         }
         else
         {
-            if((head !=loc)&&(loc->next == NULL))
-                loc->next = new1;
-            else
+            loc=head;
+            for(i=2;i<pos;i++)
             {
-                new1->next = loc->next;
-                loc->next = new1;
+                loc=loc->next;
             }
+            new2->next=loc->next;
+            loc->next=new2;
         }
     }
 }
