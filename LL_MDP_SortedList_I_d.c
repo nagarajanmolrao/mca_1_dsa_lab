@@ -10,7 +10,6 @@ struct llist
 
 typedef struct llist node;
 node *head,*new1;
-int count=0;
 
 void display_LL()
 {
@@ -27,37 +26,26 @@ void display_LL()
 
 void LL_in()
 {
-    int pos,i,temp;
     node *new2,*loc,*locp;
+    new2=(node*)malloc(sizeof(node));
     printf("Enter element: ");
-    scanf("%d",&temp);
+    scanf("%d",&new2->data);
     loc=head;
-    while(temp>=loc->data)
+    locp=head;
+    while(loc!=NULL && loc->data <= new2->data)
     {
         locp=loc;
         loc=loc->next;
     }
-    new2=(node*)malloc(sizeof(node));
-    new2->data=temp;
-    new2->next=NULL;
+    new2->next = loc;
     if(locp==head)
     {
-        new2->next=head;
         head=new2;
     }
     else
     {
-        /*loc=head;
-        for(i=2;i<pos;i++)
-        {
-            loc=loc->next;
-        }
-        new2->next=loc->next;
-        loc->next=new2;*/
-        new2->next=locp->next;
         locp->next=new2;
     }
-    count++;
 }
 
 void main()
@@ -70,7 +58,6 @@ void main()
     printf("Enter initial Linked List:\n");
     printf("Enter data: ");
     scanf("%d",&ptr->data);
-    count++;
     do
     {
         printf("\nContinue Linked List? y or n: ");
@@ -83,7 +70,6 @@ void main()
                 ptr=new1;
                 printf("\nEnter data: ");
                 scanf("%d",&ptr->data);
-                count++;
                 break;
             }
             case 'n': {
