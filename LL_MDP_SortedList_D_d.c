@@ -28,7 +28,7 @@ void display_LL()
     getch();
 }
 
-void LL_in()
+void LL_del()
 {
     node *new2,*loc,*locp;
     new2=(node*)malloc(sizeof(node));
@@ -36,20 +36,30 @@ void LL_in()
     scanf("%d",&new2->data);
     loc=head;
     locp=head;
-    while(loc!=NULL && loc->data <= new2->data)
+    if(head==NULL)
+    {
+        printf("Empty Linked List!\n");
+        return;
+    }
+    if(loc!=NULL && loc->data==new2->data)
+    {
+        head=loc->next;
+        free(loc);
+        return;
+    }
+    while(loc!=NULL&&loc->data != new2->data)
     {
         locp=loc;
         loc=loc->next;
     }
-    new2->next = loc;
-    if(locp==head)
+    if(loc==NULL)
     {
-        head=new2;
+        printf("Element not Found!");
+        return;
     }
-    else
-    {
-        locp->next=new2;
-    }
+    locp->next=loc->next;
+    free(loc);
+
 }
 
 void main()
@@ -58,7 +68,7 @@ void main()
     char op;
     head = (node*)malloc(sizeof(node));
     node *ptr=head;
-    printf("Please input data only in ASCENDING ORDER\n!");
+    printf("Please input data only in ASCENDING ORDER!\n");
     printf("Enter initial Linked List:\n");
     printf("Enter data: ");
     scanf("%d",&ptr->data);
@@ -87,12 +97,12 @@ void main()
     do
     {
         printf("\nOperations on sorted Linked List:\n");
-        printf("1.\tInsert new Node\n2.\tDisplay Linked List\n3.\tExit");
+        printf("1.\tDelete a node\n2.\tDisplay Linked List\n3.\tExit");
         printf("\nChoice: ");
         scanf("%d",&ch);
         switch(ch)
         {
-            case 1:LL_in();break;
+            case 1:LL_del();break;
             case 2:display_LL();break;
             case 3:exit(1);
             default: {
