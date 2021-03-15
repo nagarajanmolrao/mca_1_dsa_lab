@@ -2,20 +2,17 @@
 #include <conio.h>
 #include <stdlib.h>
 
-void linearSearch(int);
-void binarySearch(int);
-
+int i, n, ch;
 void main()
 {
-	int i, n, ch;
 	printf("IMPLEMENTATION OF SEARCHING TECHNIQUES\n");
 	printf("Enter the number of elements: ");
 	scanf("%d", &n);
-	int arr = (int *)malloc(sizeof(int)*n);
+	int *arr=(int*)malloc(sizeof(int)*n);
 	printf("Enter the array elements:\n");
 	for(i=0;i<n;i++)
 	{
-		scanf("%d",&ptr[i]);
+		scanf("%d",&arr[i]);
 	}
 	int searchKey;
 	printf("Enter the search Element: ");
@@ -27,9 +24,47 @@ void main()
 	scanf("%d", &ch);
 	switch(ch)
 	{
-		case 1: linearSearch(searchKey);break;
-		case 2: binarySearch(searchKey);break;
+		case 1: {
+		    for(i=0;i<n;i++)
+            {
+                if(searchKey==arr[i])
+                {
+                    printf("\nElement found at %d position",i+1);
+                    break;
+                }
+            }
+            if(i>=n)
+            {
+                printf("Element not found in the given array!\n");
+            }
+            getch();
+            exit(1);
+		}
+		case 2: {
+		    int first = 0, last = n-1, middle=(first+last)/2;
+		    while(first<=last)
+            {
+                if(arr[middle]<searchKey)
+                {
+                    first=middle+1;
+                }
+                else if(arr[middle]==searchKey)
+                {
+                    printf("Element found at %d position",middle+1);
+                    getch();
+                    break;
+                }
+                else
+                    last=middle-1;
+                middle=(first+last)/2;
+                if(first>last)
+                {
+                    printf("Element not found!");
+                    getch();
+                }
+            }
+		}
 		case 3: exit(1);
 		default: printf("\nInvalid Choice");break;
 	}
-	
+}
