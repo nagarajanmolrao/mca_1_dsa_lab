@@ -2,9 +2,9 @@
 #include <conio.h>
 #include <stdlib.h>
 
-int i, n, ch;
 void main()
 {
+	int i, n, ch;
 	printf("IMPLEMENTATION OF SEARCHING TECHNIQUES\n");
 	printf("Enter the number of elements: ");
 	scanf("%d", &n);
